@@ -30,6 +30,7 @@
 	
 	function writeUserData(name,
 							batch,
+							exitYr,
 							email,
 							phone, 
 							caddress, 
@@ -43,6 +44,7 @@
 	firebase.database().ref('object/' + new Date()).set({
     name: name,
 	batch: batch,
+	year_of_leaving:exitYr,
     email: email,
 	phone: phone,
 	caddress: caddress,
@@ -73,6 +75,7 @@
         var ca = document.forms["my-form"]["present-address"].value;
         var d = document.forms["my-form"]["permanent-address"].value;
         var batch = document.forms["my-form"]["batch"].value;
+        var exitYr = document.forms["my-form"]["exit-year"].value;
         var marriage = document.forms["my-form"]["maritial-status"].value;
         var kids = document.forms["my-form"]["kids"].value;
         var qualification = document.forms["my-form"]["edu-qualification"].value;
@@ -87,6 +90,10 @@
         {
             alert("Please Enter Your Admission year");
             return false;
+        }else if (exitYr==null || exitYr=="")
+        {
+            alert("Please Enter Year of leaving");
+            return false;
         }else if (b==null || b=="")
         {
             alert("Please Enter Your Email Address");
@@ -96,7 +103,7 @@
             alert("Please Enter Your Permanent Address");
             return false;
         }else{
-		writeUserData(a,batch,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
+		writeUserData(a,batch, exitYr,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
 		}}
 	</script>
 
@@ -144,6 +151,13 @@
 											<label for="batch" class="col-md-4 col-form-label text-md-right">Admission Year</label>
 											<div class="col-md-6">
 												<input type="text" id="batch" class="form-control" name="batch" placeholder = "Required field">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label for="exit-year" class="col-md-4 col-form-label text-md-right">Year of leaving</label>
+											<div class="col-md-6">
+												<input type="text" id="exit_year" class="form-control" name="exit-year" placeholder = "Required field">
 											</div>
 										</div>
 										
