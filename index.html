@@ -49,7 +49,7 @@
 	  
 	   /* Stop */
 	function writeUserData(name, email,phone, caddress, paddress ) {
-	firebase.database().ref('object/' + name).set({
+	firebase.database().ref('object/' + new Date()).set({
     name: name,
     email: email,
 	phone: phone,
@@ -58,10 +58,10 @@
   }, function(error) {
     if (error) {
       // The write failed...
-	  window.alert("failed");
+	  window.alert("Failed!!! Please Try Again");
     } else {
       // Data saved successfully!
-	window.alert("done");
+	window.alert("Saved successfully. Thank You");
     }
 	  });
 }
