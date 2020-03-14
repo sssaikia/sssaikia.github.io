@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+	<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+    <title>Alumni Data</title>
+  </head>
+  <body>
+    <h1>JSON output</h1>
+	<pre id='object'></pre>
+	<script>
+	  // Initialize Firebase
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyDf1aKSTPybfBWeYjIxteChNHpiPReFzkE",
+	    authDomain: "jnvalumnidata-668d8.firebaseapp.com",
+	    databaseURL: "https://jnvalumnidata-668d8.firebaseio.com",
+	    projectId: "jnvalumnidata-668d8",
+	    storageBucket: "jnvalumnidata-668d8.appspot.com",
+	   messagingSenderId: "1074641169948",
+	    appId: "1:1074641169948:web:6b04abd3fd655744deb9d9"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+		var db = firebase.database();
+		const preObject = document.getElementById('object');
+		const dbRefObject = db.ref().child('object');
+		dbRefObject.on('value', snap => {
+		//console.log(snap.val());	
+		preObject.innerText = JSON.stringify(snap.val(), null, 3);
+	}, function(error) {
+	  // The fetch failed.
+	  console.error(error);
+	});	  
+	   /* Stop */
+	</script>
+  </body>
+</html>
