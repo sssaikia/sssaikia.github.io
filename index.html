@@ -50,13 +50,31 @@
 	//writeUserData("124","name","email","url");
 	  
 	   /* Stop */
-	function writeUserData(name, email,phone, caddress, paddress ) {
-	firebase.database().ref('object/' + new Date()).set({
+	function writeUserData(name,
+							batch,
+							email,
+							phone, 
+							caddress, 
+							paddress,
+							marriage,
+							spouse,
+							kids,
+							qualification,
+							occupation,
+							employer ) {
+	firebase.database().ref('test/' + new Date()).set({
     name: name,
+	batch: batch,
     email: email,
 	phone: phone,
 	caddress: caddress,
-	paddress: paddress
+	paddress: paddress,
+	marriage: marriage,
+	spouse: spouse,
+	kids: kids,
+	qualification:qualification,
+	occupation:occupation,
+	employer:employer
   }, function(error) {
     if (error) {
       // The write failed...
@@ -77,10 +95,22 @@
         var ph = document.forms["my-form"]["phone-number"].value;
         var ca = document.forms["my-form"]["present-address"].value;
         var d = document.forms["my-form"]["permanent-address"].value;
+        var batch = document.forms["my-form"]["batch"].value;
+        var marriage = document.forms["my-form"]["maritial-status"].value;
+        var kids = document.forms["my-form"]["kids"].value;
+        var qualification = document.forms["my-form"]["edu-qualification"].value;
+        var spouse = document.forms["my-form"]["spouse-name"].value;
+        var occupation = document.forms["my-form"]["Occupation"].value;
+        var employer = document.forms["my-form"]["employer"].value;
+
 
         if (a==null || a=="")
         {
             alert("Please Enter Your Full Name");
+            return false;
+        }else if (batch==null || batch=="")
+        {
+            alert("Please Enter Your Admission year");
             return false;
         }else if (b==null || b=="")
         {
@@ -91,7 +121,7 @@
             alert("Please Enter Your Permanent Address");
             return false;
         }else{
-		writeUserData(a,b,ph,ca,d);
+		writeUserData(a,batch,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
 		}
 
     }</script>
@@ -110,7 +140,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="json.html">View JSON</a>
+                <a class="nav-link" href="json.html">json</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Register</a>
@@ -130,11 +160,19 @@
                         <div class="card-body">
                             <form name="my-form"  action="#" method="post" )">
                                 <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
+                                    <label for="full_name" class="col-md-4 col-form-label text-md-right" >Full Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="full_name" class="form-control" name="full-name">
+                                        <input type="text" id="full_name" class="form-control" name="full-name" placeholder = "Required field">
                                     </div>
                                 </div>
+								
+								<div class="form-group row">
+                                    <label for="batch" class="col-md-4 col-form-label text-md-right">Admission Year</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="batch" class="form-control" name="batch" placeholder = "Required field">
+                                    </div>
+                                </div>
+								
 
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
@@ -146,7 +184,7 @@
                                 <div class="form-group row">
                                     <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="phone_number" class="form-control" name="phone-number">
+                                        <input type="text" id="phone_number" class="form-control" name="phone-number" placeholder = "Required field">
                                     </div>
                                 </div>
 
@@ -160,25 +198,68 @@
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent Address</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="permanent_address" class="form-control" name="permanent-address">
+                                        <input type="text" id="permanent_address" class="form-control" name="permanent-address" placeholder = "Required field">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="maritial_status" class="col-md-4 col-form-label text-md-right">Maritial Status</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="maritial_status" class="form-control" name="maritial-status">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="spouse_name" class="col-md-4 col-form-label text-md-right">Spouse Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="spouse_name" class="form-control" name="spouse-name">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="Number_of_kids" class="col-md-4 col-form-label text-md-right">Number of kids</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Number_of_kids" class="form-control" name="kids">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="qualification" class="col-md-4 col-form-label text-md-right">Educational Qualification</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="qualification" class="form-control" name="edu-qualification">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="Occupation" class="col-md-4 col-form-label text-md-right">Occupation</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Occupation" class="form-control" name="Occupation">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="employer" class="col-md-4 col-form-label text-md-right">Name of Employer</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="employer" class="form-control" name="employer">
                                     </div>
                                 </div>
 
                                     <div class="col-md-6 offset-md-4">
                                         <button type="button" class="btn btn-primary" onclick = validform();>
-                                        Register
+                                        Save
                                         </button>
                                     </div>
                                 </div>
-				<div class="col-md-6 offset-md-4">
-					<h7>Click on<a href="json.html"> view JSON</a> to see the raw data</h7>
-				</div>
+								<div class="col-md-6 offset-md-4">
+								<h7>Click on<a href="json.html"> view JSON</a> to see the raw data</h7>
+								</div>
                             </form>
                         </div>
                     </div>
             </div>
         </div>
     </div>
+	
 
 </main>
 
