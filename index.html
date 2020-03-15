@@ -27,10 +27,22 @@
 	    appId: "1:1074641169948:web:6b04abd3fd655744deb9d9"
 	  };
 	firebase.initializeApp(firebaseConfig);
+	/*var json;
+		const preObject = document.getElementById('object');
+		const dbRefObject = firebase.database().ref().child('object');
+		dbRefObject.on('value', snap => {
+		json = snap.val;
+		//console.log(snap.val());	
+		//preObject.innerText = JSON.stringify(snap.val(), null, 3);
+	}, function(error) {
+	  // The fetch failed.
+	  console.error(error);
+	});*/
 	
 	function writeUserData(name,
 							batch,
 							exitYr,
+							blood,
 							email,
 							phone, 
 							caddress, 
@@ -40,11 +52,13 @@
 							kids,
 							qualification,
 							occupation,
+							designation,
 							employer ) {
-	firebase.database().ref('object/' + new Date()).set({
+	firebase.database().ref('object/' + phone).set({
     name: name,
 	batch: batch,
 	year_of_leaving:exitYr,
+	blood_group: blood,
     email: email,
 	phone: phone,
 	caddress: caddress,
@@ -54,11 +68,12 @@
 	kids: kids,
 	qualification:qualification,
 	occupation:occupation,
+	designation: designation,
 	employer:employer
 	}, function(error) {
     if (error) {
       // The write failed...
-		window.alert("Failed!!! Please Try Again");
+		window.alert("Record already exist against this phone number.");
     } else {
       // Data saved successfully!
 		window.alert("Saved successfully. Thank You");
@@ -82,6 +97,8 @@
         var spouse = document.forms["my-form"]["spouse-name"].value;
         var occupation = document.forms["my-form"]["Occupation"].value;
         var employer = document.forms["my-form"]["employer"].value;
+		var blood_group = document.forms["my-form"]["blood"].value;
+		var designation = document.forms["my-form"]["designation"].value;
         if (a==null || a=="")
         {
             alert("Please Enter Your Full Name");
@@ -103,13 +120,17 @@
             alert("Please Enter Your Permanent Address");
             return false;
         }else{
-		writeUserData(a,batch, exitYr,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
+		//if(confirm("previous data if exists, will be overwritten")){
+				//writeUserData(a,batch, exitYr,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
+		//}
+		writeUserData(a,batch, exitYr,blood_group,b,ph,ca,d,marriage,spouse,kids, qualification, occupation,designation, employer);
 		}}
 	</script>
 
-<title>JNV Alumni Data</title>
+<title>JNV Darrang Alumni Data</title>
 </head>
 <body>
+<div class= "container">
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
     <div class="container">
     <a class="navbar-brand" href="#"><h3><p class="text-primary" >Alumni Data collection hub</p></h3></a>
@@ -124,7 +145,7 @@
                 <a class="nav-link" href="json.html">json</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <a class="nav-link" href="#" onclick="return window.alert('Contact using the whatsapp group,. Thank you.')";">Contact</a>
             </li>
         </ul>
     </div>
@@ -158,6 +179,13 @@
 											<label for="exit-year" class="col-md-4 col-form-label text-md-right">Year of leaving</label>
 											<div class="col-md-6">
 												<input type="text" id="exit_year" class="form-control" name="exit-year" placeholder = "Required field">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label for="blood_group" class="col-md-4 col-form-label text-md-right">Blood group</label>
+											<div class="col-md-6">
+												<input type="text" id="blood_group" class="form-control" name="blood" >
 											</div>
 										</div>
 										
@@ -226,6 +254,13 @@
 										</div>
 										
 										<div class="form-group row">
+											<label for="designation" class="col-md-4 col-form-label text-md-right">Designation</label>
+											<div class="col-md-6">
+												<input type="text" id="designation" class="form-control" name="designation">
+											</div>
+										</div>
+										
+										<div class="form-group row">
 											<label for="employer" class="col-md-4 col-form-label text-md-right">Name of Employer</label>
 											<div class="col-md-6">
 												<input type="text" id="employer" class="form-control" name="employer">
@@ -250,7 +285,16 @@
 			</div>
 		</div>
 	</main>
-
+</div>
+  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>This project is in beta phase. 
+	  If I get enough response and support from you guys, 
+	  more funtionality and features might be added in future. <p>
+	  Please note that I'm not doing this for money, 
+	  in case anyone is wondering. Thank You.</p></small>
+    </div>
+  </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
