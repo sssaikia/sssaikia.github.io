@@ -2,13 +2,30 @@
   <head>
     <meta charset="utf-8"/>
 	<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
-    <title>Alumni Data</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>The Family</title>
   </head>
-  <body>
-    <h1>JSON output</h1>
-	  <h3>Displaying raw JSON data</h3>
-	  <h4>This can easily be converted to csv/excel using an online converter site, like <a href="https://json-csv.com/">this</a></h4>
-	<pre id='object'></pre>
+  <body class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="shadow-lg p-3 mb-5 bg-white rounded">
+
+				<h3>The Family</h3>
+				
+				<div class="row justify-content-center">
+					<table style="width:90%" id="ex-table" class="table table-striped">
+						<tr id="tr">
+							<th>Name:</th>
+							<th>Batch:</th> 
+					</table> 
+				</div>
+
 	<script>
 	  // Initialize Firebase
 	  var firebaseConfig = {
@@ -21,17 +38,27 @@
 	    appId: "1:1074641169948:web:6b04abd3fd655744deb9d9"
 	  };
 	  firebase.initializeApp(firebaseConfig);
-		var db = firebase.database();
-		const preObject = document.getElementById('object');
-		const dbRefObject = db.ref().child('object');
-		dbRefObject.on('value', snap => {
-		//console.log(snap.val());	
-		preObject.innerText = JSON.stringify(snap.val(), null, 3);
-	}, function(error) {
-	  // The fetch failed.
-	  console.error(error);
-	});	  
-	   /* Stop */
+		
+	   var database = firebase.database();
+    database.ref("/object").once('value', function(snapshot){
+        if(snapshot.exists()){
+            var content = '';
+            snapshot.forEach(function(data){
+			//console.log((data.val().key).val());
+                var pval = data.val();
+				//var child = pval.val();
+				//console.log(pval);
+                content +='<tr>';
+                content += '<td>' + pval.name + '</td>';
+                content += '<td>' + pval.batch + '</td>';
+                content += '</tr>';
+            });
+            $('#ex-table').append(content);
+        }
+    });
 	</script>
+	</div>
+	</div>
+	</div>
   </body>
 </html>
