@@ -45,6 +45,8 @@
 										<tr id="tr">
 											<th onclick=sortTable(0)>Name</th>
 											<th onclick=sortTable(1)>Batch</th> 
+											<th onclick=sortTable(2)>Admission Year</th> 
+											<th onclick=sortTable(3)>Leaving year</th> 
 									</table> 
 								</div>
 							</div>
@@ -76,6 +78,8 @@
                 content +='<tr>';
                 content += '<td>' + pval.name + '</td>';
                 content += '<td>' + pval.batch + '</td>';
+                content += '<td>' + pval.admission_year + '</td>';
+                content += '<td>' + pval.year_of_leaving + '</td>';
                 content += '</tr>';
             });
             $('#ex-table').append(content);
