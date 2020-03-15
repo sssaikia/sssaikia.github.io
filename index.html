@@ -41,6 +41,7 @@
 	
 	function writeUserData(name,
 							batch,
+							admYear,
 							exitYr,
 							blood,
 							email,
@@ -57,15 +58,16 @@
 	firebase.database().ref('object/' + phone).set({
     name: name,
 	batch: batch,
+	admission_year:admYear,
 	year_of_leaving:exitYr,
 	blood_group: blood,
     email: email,
 	phone: phone,
-	caddress: caddress,
-	paddress: paddress,
-	marriage: marriage,
-	spouse: spouse,
-	kids: kids,
+	current_address: caddress,
+	parmanent_address: paddress,
+	marital_status: marriage,
+	spouse_name: spouse,
+	number_of_kids: kids,
 	qualification:qualification,
 	occupation:occupation,
 	designation: designation,
@@ -99,11 +101,16 @@
         var employer = document.forms["my-form"]["employer"].value;
 		var blood_group = document.forms["my-form"]["blood"].value;
 		var designation = document.forms["my-form"]["designation"].value;
+		var admYear = document.forms["my-form"]["admYear"].value;
         if (a==null || a=="")
         {
             alert("Please Enter Your Full Name");
             return false;
         }else if (batch==null || batch=="")
+        {
+            alert("Please Enter Your Batch year");
+            return false;
+        }else if (admYear==null || admYear=="")
         {
             alert("Please Enter Your Admission year");
             return false;
@@ -111,9 +118,9 @@
         {
             alert("Please Enter Year of leaving");
             return false;
-        }else if (b==null || b=="")
+        }else if (ph==null || ph=="")
         {
-            alert("Please Enter Your Email Address");
+            alert("Please Enter Your Phone Number");
             return false;
         }else if (d==null || d=="")
         {
@@ -123,7 +130,7 @@
 		//if(confirm("previous data if exists, will be overwritten")){
 				//writeUserData(a,batch, exitYr,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
 		//}
-		writeUserData(a,batch, exitYr,blood_group,b,ph,ca,d,marriage,spouse,kids, qualification, occupation,designation, employer);
+		writeUserData(a,batch,admYear, exitYr,blood_group,b,ph,ca,d,marriage,spouse,kids, qualification, occupation,designation, employer);
 		}}
 	</script>
 
@@ -169,9 +176,16 @@
 										</div>
 										
 										<div class="form-group row">
-											<label for="batch" class="col-md-4 col-form-label text-md-right">Admission Year</label>
+											<label for="batch" class="col-md-4 col-form-label text-md-right">Batch</label>
 											<div class="col-md-6">
 												<input type="text" id="batch" class="form-control" name="batch" placeholder = "Required field">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label for="admYear" class="col-md-4 col-form-label text-md-right">Admission Year</label>
+											<div class="col-md-6">
+												<input type="text" id="admYear" class="form-control" name="admYear" placeholder = "Required field">
 											</div>
 										</div>
 										
