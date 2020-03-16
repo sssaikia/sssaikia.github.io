@@ -47,6 +47,7 @@
 												<th onclick=sortTable(0)>Name</th>
 												<th onclick=sortTable(1)>Batch</th> 
 												<th onclick=sortTable(2)>Admission Year</th> 
+												<th onclick=sortTable(2)>Blood Group</th> 
 												<th onclick=sortTable(3)>Leaving year</th> 
 										</table> 
 									</div>
@@ -83,6 +84,7 @@
                 content += '<td>' + pval.name + '</td>';
                 content += '<td>' + pval.batch + '</td>';
                 content += '<td>' + pval.admission_year + '</td>';
+                content += '<td>' + pval.blood_group + '</td>';
                 content += '<td>' + pval.year_of_leaving + '</td>';
                 content += '</tr>';
             });
