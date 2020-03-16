@@ -38,7 +38,7 @@
 			<div class="col-md-8">
 				<div class="shadow-lg p-3 mb-5 bg-white rounded">
 					<div class="card">
-						<div class="card-header">The Family</div>
+						<div class="card-header">The Family <p><small id="count"></small></p></div>
 							<div class="card-body">				
 								<div class="row justify-content-center">
 									<div style="overflow-x:auto;">
@@ -69,11 +69,13 @@
 	  firebase.initializeApp(firebaseConfig);
 		
 	   var database = firebase.database();
+	   var count=0;
     database.ref("/object").once('value', function(snapshot){
         if(snapshot.exists()){
             var content = '';
             snapshot.forEach(function(data){
 			//console.log((data.val().key).val());
+				count++;
                 var pval = data.val();
 				//var child = pval.val();
 				//console.log(pval);
@@ -85,7 +87,8 @@
                 content += '</tr>';
             });
             $('#ex-table').append(content);
-			sortTable(0);
+			sortTable(0);			document.getElementById("count").innerHTML = "   "+count+" till now, and counting..";
+
         }
     });
 	
