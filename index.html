@@ -1,319 +1,323 @@
 <!------ Include the above in your HEAD tag ---------->
 <!doctype html>
 <html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <link rel="icon" href="Favicon.png">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var firebaseConfig = {
-	    apiKey: "AIzaSyDf1aKSTPybfBWeYjIxteChNHpiPReFzkE",
-	    authDomain: "jnvalumnidata-668d8.firebaseapp.com",
-	    databaseURL: "https://jnvalumnidata-668d8.firebaseio.com",
-	    projectId: "jnvalumnidata-668d8",
-	    storageBucket: "jnvalumnidata-668d8.appspot.com",
-	   messagingSenderId: "1074641169948",
-	    appId: "1:1074641169948:web:6b04abd3fd655744deb9d9"
-	  };
-	firebase.initializeApp(firebaseConfig);
-	/*var json;
-		const preObject = document.getElementById('object');
-		const dbRefObject = firebase.database().ref().child('object');
-		dbRefObject.on('value', snap => {
-		json = snap.val;
-		//console.log(snap.val());	
-		//preObject.innerText = JSON.stringify(snap.val(), null, 3);
-	}, function(error) {
-	  // The fetch failed.
-	  console.error(error);
-	});*/
-	
-	function writeUserData(name,
-							batch,
-							admYear,
-							exitYr,
-							blood,
-							email,
-							phone, 
-							caddress, 
-							paddress,
-							marriage,
-							spouse,
-							kids,
-							qualification,
-							occupation,
-							designation,
-							employer ) {
-	firebase.database().ref('object/' + phone).set({
-    name: name,
-	batch: batch,
-	admission_year:admYear,
-	year_of_leaving:exitYr,
-	blood_group: blood,
-    email: email,
-	phone: phone,
-	current_address: caddress,
-	parmanent_address: paddress,
-	marital_status: marriage,
-	spouse_name: spouse,
-	number_of_kids: kids,
-	qualification:qualification,
-	occupation:occupation,
-	designation: designation,
-	employer:employer
-	}, function(error) {
-    if (error) {
-      // The write failed...
-		window.alert("Record already exist against this phone number.");
-    } else {
-      // Data saved successfully!
-		window.alert("Saved successfully. Thank You");
-    }
-	  });
-	}
-	</script>
-
-<script>
-		function validform() {
-        var a = document.forms["my-form"]["full-name"].value;
-        var b = document.forms["my-form"]["email-address"].value;
-        var ph = document.forms["my-form"]["phone-number"].value;
-		ph=ph.replace(/[&\/\\#, +()$~%.'":*?<>{}]/g, '_');
-		//window.alert(ph);
-        var ca = document.forms["my-form"]["present-address"].value;
-        var d = document.forms["my-form"]["permanent-address"].value;
-        var batch = document.forms["my-form"]["batch"].value;
-        var exitYr = document.forms["my-form"]["exit-year"].value;
-        var marriage = document.forms["my-form"]["maritial-status"].value;
-        var kids = document.forms["my-form"]["kids"].value;
-        var qualification = document.forms["my-form"]["edu-qualification"].value;
-        var spouse = document.forms["my-form"]["spouse-name"].value;
-        var occupation = document.forms["my-form"]["Occupation"].value;
-        var employer = document.forms["my-form"]["employer"].value;
-		var blood_group = document.forms["my-form"]["blood"].value;
-		var designation = document.forms["my-form"]["designation"].value;
-		var admYear = document.forms["my-form"]["admYear"].value;
-        if (a==null || a=="")
-        {
-            alert("Please Enter Your Full Name");
-            return false;
-        }else if (batch==null || batch=="")
-        {
-            alert("Please Enter Your Batch year");
-            return false;
-        }else if (admYear==null || admYear=="")
-        {
-            alert("Please Enter Your Admission year");
-            return false;
-        }else if (exitYr==null || exitYr=="")
-        {
-            alert("Please Enter Year of leaving");
-            return false;
-        }else if (ph==null || ph=="")
-        {
-            alert("Please Enter Your Phone Number");
-            return false;
-        }else if (d==null || d=="")
-        {
-            alert("Please Enter Your Permanent Address");
-            return false;
-        }else{
-		//if(confirm("previous data if exists, will be overwritten")){
-				//writeUserData(a,batch, exitYr,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
-		//}
-		writeUserData(a,batch,admYear, exitYr,blood_group,b,ph,ca,d,marriage,spouse,kids, qualification, occupation,designation, employer);
-		}}
-	</script>
-
-<title>JNV Darrang Alumni Data</title>
-</head>
-<body>
-<div class= "container">
-<nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
-    <div class="container">
-    <a class="navbar-brand" href="#"><h3><p class="text-primary" >Alumni Data collection hub</p></h3></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" 
-			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-			aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="json.html">Members</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="return window.alert('Contact using the whatsapp group,. Thank you.')";">Contact</a>
-            </li>
-        </ul>
-    </div>
-    </div>
-</nav>
-
-	<main class="my-form">
-		<div class="cotainer">
-			<div class="row justify-content-center">
-				<div class="col-md-8">
-					<div class="shadow-lg p-3 mb-5 bg-white rounded">
-						<div class="card">
-							<div class="card-header">Fill out the following details</div>
-								<div class="card-body">
-									<form name="my-form"  action="#" method="post" )">
-										<div class="form-group row">
-											<label for="full_name" class="col-md-4 col-form-label text-md-right" >Full Name</label>
-											<div class="col-md-6">
-												<input type="text" id="full_name" class="form-control" name="full-name" placeholder = "Required field">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Fonts -->
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+		<link rel="icon" href="Favicon.png">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+		<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+		<script>
+			// Initialize Firebase
+			var firebaseConfig = {
+			apiKey: "AIzaSyDf1aKSTPybfBWeYjIxteChNHpiPReFzkE",
+			authDomain: "jnvalumnidata-668d8.firebaseapp.com",
+			databaseURL: "https://jnvalumnidata-668d8.firebaseio.com",
+			projectId: "jnvalumnidata-668d8",
+			storageBucket: "jnvalumnidata-668d8.appspot.com",
+			messagingSenderId: "1074641169948",
+			appId: "1:1074641169948:web:6b04abd3fd655744deb9d9"
+			};
+			firebase.initializeApp(firebaseConfig);
+			/*var json;
+			const preObject = document.getElementById('object');
+			const dbRefObject = firebase.database().ref().child('object');
+			dbRefObject.on('value', snap => {
+			json = snap.val;
+			//console.log(snap.val());	
+			//preObject.innerText = JSON.stringify(snap.val(), null, 3);
+			}, function(error) {
+			// The fetch failed.
+			console.error(error);
+			});*/
+			
+			function writeUserData(name,
+			batch,
+			admYear,
+			exitYr,
+			blood,
+			email,
+			phone, 
+			caddress, 
+			paddress,
+			marriage,
+			spouse,
+			kids,
+			qualification,
+			occupation,
+			designation,
+			employer ) {
+				firebase.database().ref('object/' + phone).set({
+					name: name,
+					batch: batch,
+					admission_year:admYear,
+					year_of_leaving:exitYr,
+					blood_group: blood,
+					email: email,
+					phone: phone,
+					current_address: caddress,
+					parmanent_address: paddress,
+					marital_status: marriage,
+					spouse_name: spouse,
+					number_of_kids: kids,
+					qualification:qualification,
+					occupation:occupation,
+					designation: designation,
+					employer:employer
+					}, function(error) {
+					if (error) {
+						// The write failed...
+						window.alert("Record already exist against this phone number.");
+						} else {
+						// Data saved successfully!
+						window.alert("Saved successfully. Thank You");
+					}
+				});
+			}
+		</script>
+		
+		<script>
+			function validform() {
+				var a = document.forms["my-form"]["full-name"].value;
+				var b = document.forms["my-form"]["email-address"].value;
+				var ph = document.forms["my-form"]["phone-number"].value;
+				ph=ph.replace(/[&\/\\#, +()$~%.'":*?<>{}]/g, '_');
+				//window.alert(ph);
+				var ca = document.forms["my-form"]["present-address"].value;
+				var d = document.forms["my-form"]["permanent-address"].value;
+				var batch = document.forms["my-form"]["batch"].value;
+				var exitYr = document.forms["my-form"]["exit-year"].value;
+				var marriage = document.forms["my-form"]["maritial-status"].value;
+				var kids = document.forms["my-form"]["kids"].value;
+				var qualification = document.forms["my-form"]["edu-qualification"].value;
+				var spouse = document.forms["my-form"]["spouse-name"].value;
+				var occupation = document.forms["my-form"]["Occupation"].value;
+				var employer = document.forms["my-form"]["employer"].value;
+				var blood_group = document.forms["my-form"]["blood"].value;
+				var designation = document.forms["my-form"]["designation"].value;
+				var admYear = document.forms["my-form"]["admYear"].value;
+				if (a==null || a=="")
+				{
+					alert("Please Enter Your Full Name");
+					return false;
+				}else if (batch==null || batch=="")
+				{
+					alert("Please Enter Your Batch year");
+					return false;
+				}else if (admYear==null || admYear=="")
+				{
+					alert("Please Enter Your Admission year");
+					return false;
+				}else if (exitYr==null || exitYr=="")
+				{
+					alert("Please Enter Year of leaving");
+					return false;
+				}else if (ph==null || ph=="")
+				{
+					alert("Please Enter Your Phone Number");
+					return false;
+				}else if (d==null || d=="")
+				{
+					alert("Please Enter Your Permanent Address");
+					return false;
+					}else{
+					//if(confirm("previous data if exists, will be overwritten")){
+					//writeUserData(a,batch, exitYr,b,ph,ca,d,marriage,spouse,kids, qualification, occupation, employer);
+					//}
+					writeUserData(a,batch,admYear, exitYr,blood_group,b,ph,ca,d,marriage,spouse,kids, qualification, occupation,designation, employer);
+				}}
+		</script>
+		
+		<title>JNV Darrang Alumni Data</title>
+	</head>
+	<body>
+		<div class= "container">
+			<nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+				<div class="container">
+					<a class="navbar-brand" href="#"><h3><p class="text-primary" >Alumni Data collection hub</p></h3></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" 
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+					aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="json.html">Members</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="feedback.html">Feedback</a>
+								</li>
+								</ul>
+								</div>
+								</div>
+								</nav>
+								
+								<main class="my-form">
+									<div class="cotainer">
+										<div class="row justify-content-center">
+											<div class="col-md-8">
+												<div class="shadow-lg p-3 mb-5 bg-white rounded">
+													<div class="card">
+														<div class="card-header">Fill out the following details</div>
+														<div class="card-body">
+															<form name="my-form"  action="#" method="post" >
+															<div class="form-group row">
+																<label for="full_name" class="col-md-4 col-form-label text-md-right" >Full Name</label>
+																<div class="col-md-6">
+																	<input type="text" id="full_name" class="form-control" name="full-name" placeholder = "Required field">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="batch" class="col-md-4 col-form-label text-md-right">Batch Year (class 6th) </label>
+																<div class="col-md-6">
+																	<input type="text" id="batch" class="form-control" name="batch" placeholder = "Required field">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="admYear" class="col-md-4 col-form-label text-md-right">Admission Year</label>
+																<div class="col-md-6">
+																	<input type="text" id="admYear" class="form-control" name="admYear" placeholder = "Required field">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="exit-year" class="col-md-4 col-form-label text-md-right">Year of leaving</label>
+																<div class="col-md-6">
+																	<input type="text" id="exit_year" class="form-control" name="exit-year" placeholder = "Required field">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="blood_group" class="col-md-4 col-form-label text-md-right">Blood group</label>
+																<div class="col-md-6">
+																	<input type="text" id="blood_group" class="form-control" name="blood" >
+																</div>
+															</div>
+															
+															
+															<div class="form-group row">
+																<label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+																<div class="col-md-6">
+																	<input type="text" id="email_address" class="form-control" name="email-address">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+																<div class="col-md-6">
+																	<input type="tel" pattern= "[0-9]{10}" id="phone_number" class="form-control" name="phone-number" placeholder = "Required field">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="present_address" class="col-md-4 col-form-label text-md-right">Present Address</label>
+																<div class="col-md-6">
+																	<input type="text" id="present_address" class="form-control" name="present-address">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent Address</label>
+																<div class="col-md-6">
+																	<input type="text" id="permanent_address" class="form-control" name="permanent-address" placeholder = "Required field">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="maritial_status" class="col-md-4 col-form-label text-md-right">Marital Status</label>
+																<div class="col-md-6">
+																	<input type="text" id="maritial_status" class="form-control" name="maritial-status">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="spouse_name" class="col-md-4 col-form-label text-md-right">Spouse Name</label>
+																<div class="col-md-6">
+																	<input type="text" id="spouse_name" class="form-control" name="spouse-name">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="Number_of_kids" class="col-md-4 col-form-label text-md-right">Number of kids</label>
+																<div class="col-md-6">
+																	<input type="text" id="Number_of_kids" class="form-control" name="kids">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="qualification" class="col-md-4 col-form-label text-md-right">Educational Qualification</label>
+																<div class="col-md-6">
+																	<input type="text" id="qualification" class="form-control" name="edu-qualification">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="Occupation" class="col-md-4 col-form-label text-md-right">Occupation</label>
+																<div class="col-md-6">
+																	<input type="text" id="Occupation" class="form-control" name="Occupation">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="designation" class="col-md-4 col-form-label text-md-right">Designation</label>
+																<div class="col-md-6">
+																	<input type="text" id="designation" class="form-control" name="designation">
+																</div>
+															</div>
+															
+															<div class="form-group row">
+																<label for="employer" class="col-md-4 col-form-label text-md-right">Name of Employer</label>
+																<div class="col-md-6">
+																	<input type="text" id="employer" class="form-control" name="employer">
+																</div>
+															</div>
+															
+															<div class="col-md-6 offset-md-4">
+																<button type="button" class="btn btn-primary" onclick = validform();>
+																	Save
+																</button>
+															</div>
+														</div>
+														<div class="col-md-6 offset-md-4">
+															<h7> <a href="json.html">Click</a> to see who else has joined</h7>
+															<p>
+															<h7>Or post a <a href="feedback.html">Feedback</a></h7>
+															</p>
+														</div>
+													</form>
+												</div>
 											</div>
 										</div>
-										
-										<div class="form-group row">
-											<label for="batch" class="col-md-4 col-form-label text-md-right">Batch Year (class 6th) </label>
-											<div class="col-md-6">
-												<input type="text" id="batch" class="form-control" name="batch" placeholder = "Required field">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="admYear" class="col-md-4 col-form-label text-md-right">Admission Year</label>
-											<div class="col-md-6">
-												<input type="text" id="admYear" class="form-control" name="admYear" placeholder = "Required field">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="exit-year" class="col-md-4 col-form-label text-md-right">Year of leaving</label>
-											<div class="col-md-6">
-												<input type="text" id="exit_year" class="form-control" name="exit-year" placeholder = "Required field">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="blood_group" class="col-md-4 col-form-label text-md-right">Blood group</label>
-											<div class="col-md-6">
-												<input type="text" id="blood_group" class="form-control" name="blood" >
-											</div>
-										</div>
-										
-
-										<div class="form-group row">
-											<label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-											<div class="col-md-6">
-												<input type="text" id="email_address" class="form-control" name="email-address">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
-											<div class="col-md-6">
-												<input type="tel" pattern= "[0-9]{10}" id="phone_number" class="form-control" name="phone-number" placeholder = "Required field">
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label for="present_address" class="col-md-4 col-form-label text-md-right">Present Address</label>
-											<div class="col-md-6">
-												<input type="text" id="present_address" class="form-control" name="present-address">
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent Address</label>
-											<div class="col-md-6">
-												<input type="text" id="permanent_address" class="form-control" name="permanent-address" placeholder = "Required field">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="maritial_status" class="col-md-4 col-form-label text-md-right">Marital Status</label>
-											<div class="col-md-6">
-												<input type="text" id="maritial_status" class="form-control" name="maritial-status">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="spouse_name" class="col-md-4 col-form-label text-md-right">Spouse Name</label>
-											<div class="col-md-6">
-												<input type="text" id="spouse_name" class="form-control" name="spouse-name">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="Number_of_kids" class="col-md-4 col-form-label text-md-right">Number of kids</label>
-											<div class="col-md-6">
-												<input type="text" id="Number_of_kids" class="form-control" name="kids">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="qualification" class="col-md-4 col-form-label text-md-right">Educational Qualification</label>
-											<div class="col-md-6">
-												<input type="text" id="qualification" class="form-control" name="edu-qualification">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="Occupation" class="col-md-4 col-form-label text-md-right">Occupation</label>
-											<div class="col-md-6">
-												<input type="text" id="Occupation" class="form-control" name="Occupation">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="designation" class="col-md-4 col-form-label text-md-right">Designation</label>
-											<div class="col-md-6">
-												<input type="text" id="designation" class="form-control" name="designation">
-											</div>
-										</div>
-										
-										<div class="form-group row">
-											<label for="employer" class="col-md-4 col-form-label text-md-right">Name of Employer</label>
-											<div class="col-md-6">
-												<input type="text" id="employer" class="form-control" name="employer">
-											</div>
-										</div>
-
-											<div class="col-md-6 offset-md-4">
-												<button type="button" class="btn btn-primary" onclick = validform();>
-												Save
-												</button>
-											</div>
-										</div>
-										<div class="col-md-6 offset-md-4">
-											<h7> <a href="json.html">Click</a> to see who else has joined</h7>
-										</div>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>
-                    </div>
+					</main>
 				</div>
-			</div>
-		</div>
-	</main>
-</div>
-  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-    <div class="container text-center">
-      <small>This project is in beta phase. 
-	  If I get enough response and support from you guys, 
-	  more funtionality and features might be added in future. <p>
-	  Please note that I'm not doing this for money, 
-	  in case anyone is wondering. Thank You.</p></small>
-    </div>
-  </footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+				<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+					<div class="container text-center">
+						<small>This project is in beta phase. 
+							If I get enough response and support from you guys, 
+							more funtionality and features might be added in future. <p>
+								Please note that I'm not doing this for money, 
+							in case anyone is wondering. Thank You.</p></small>
+					</div>
+				</footer>
+				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+				
+			</body>
+		</html>
+		
