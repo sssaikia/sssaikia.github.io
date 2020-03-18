@@ -38,7 +38,7 @@
 			<div class="col-md-8">
 				<div class="shadow-lg p-3 mb-5 bg-white rounded">
 					<div class="card">
-						<div class="card-header">Comments</div>
+						<div class="card-header">Comments<p class="text-muted my-0"><em>New on top</em></p></div>
 							<div class="card-body">				
 								<div class="row justify-content-center">
 									<div>
@@ -80,7 +80,7 @@
 				//var child = pval.val();
 				console.log(pval);
                 content +='<tr>';
-                content += "<td><div class=' card shadow-sm p-3 mb-5 bg-white rounded'><div class='card-body'><blockquote class='blockquote mb-0'><p ><h6 class='text-wrap text-justify text-break'>" 
+                content += "<td><div class=' card shadow-sm p-3 mb-5 bg-white rounded'><div class='card-body my-0'><blockquote class='blockquote my-0'><p ><h6 class='text-wrap text-justify text-break'>" 
 				+ pval.message +
 			'</h6></p><footer class="blockquote-footer float-right">'+ pval.name+'</footer></blockquote></div></div></td>';
             });
