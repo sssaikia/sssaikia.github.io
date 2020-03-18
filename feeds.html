@@ -68,10 +68,10 @@
                 var pval = data.val();
 				//var child = pval.val();
 				//console.log(pval);
-                content +='<tr>';
-                content += "<td><div class=' card shadow-sm p-3 mb-5 bg-white rounded'><div class='card-body my-0'><blockquote class='blockquote my-0'><p ><h6 class='text-wrap text-justify text-break'>" 
+                content +='<tr class=" m-0 p-0">';
+                content += "<td><div class=' card shadow-sm p-3 mx-2 my-1 bg-white rounded'><div class=' m-0 p-0'><p class='card-text m-0 p-0'><p class='card-text m-0 p-0'><h6 class=' m-0 p-0 text-wrap text-justify text-break'>" 
 				+ pval.message +
-			'</h6></p><footer class="blockquote-footer float-right">'+ pval.name+'</footer></blockquote></div></div></td>';
+			'</h6></p><footer class="blockquote-footer float-right m-0 p-0">'+ pval.name+'</footer></p></div></div></td>';
             });
             $('#ex-table').append(content);
         }
