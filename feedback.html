@@ -27,10 +27,11 @@
 			};
 			firebase.initializeApp(firebaseConfig);
 			
-			function writeUserData(name,message) {
+			function writeUserData(phone,name,message) {
 			var stamp = 0-Number( new Date());
 			firebase.database().ref('feedback/' +stamp).set({
 			name: name,
+			phone: phone,
 			message: message,
 			t : stamp
 
@@ -49,10 +50,15 @@
 
 <script>function validform() {
 	
+	var phone = document.forms["my-form"]["phone"].value;
 	var name = document.forms["my-form"]["full-name"].value;
 	var message = document.forms["my-form"]["message"].value;
 	
-	if (name==null || name=="")
+	if (phone==null || phone=="")
+	{
+		alert("Please Enter Phone Number. This will not be displayed");
+		return false;
+	}else if (name==null || name=="")
 	{
 		alert("Please Enter Your Name");
 		return false;
@@ -60,8 +66,8 @@
 	{
 		alert("Please Enter Your Message");
 		return false;
-		}else{
-		writeUserData(name,message);
+	}else{
+		writeUserData(phone,name,message);
 	}
 	
 }</script>
@@ -99,7 +105,21 @@
 						<div class="card-header">Tell me something</div>
 						<div class="card-body">
 							<form name="my-form"  action="#" method="post">
+							
+							<div class="form-group row justify-content-center">
+								<div class="col-md-12">
+									<p class="my-0"><h6 class="text-muted my-0">In case your data needs to be updated, Please mention the field properly, where the info is wrong.
+									<p>eg: I've entered my NAME incorrectly. I entered xxxx it needs to be yyyy </p></h6>
+									<p class="text-muted my-0">Your phone number will be hidden</p></p>
+								</div>
+							</div>
 														
+							<div class="form-group row justify-content-center">
+								<div class="col-md-6">
+									<input type="text" id="full_name" class="form-control" name="phone" placeholder="Phone">
+								</div>
+							</div>
+							
 							<div class="form-group row justify-content-center">
 								<div class="col-md-6">
 									<input type="text" id="full_name" class="form-control" name="full-name" placeholder="Name">
