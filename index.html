@@ -15,30 +15,8 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+		<script src="tested.js"></script>
 		<script>
-			// Initialize Firebase
-			var firebaseConfig = {
-			apiKey: "AIzaSyDf1aKSTPybfBWeYjIxteChNHpiPReFzkE",
-			authDomain: "jnvalumnidata-668d8.firebaseapp.com",
-			databaseURL: "https://jnvalumnidata-668d8.firebaseio.com",
-			projectId: "jnvalumnidata-668d8",
-			storageBucket: "jnvalumnidata-668d8.appspot.com",
-			messagingSenderId: "1074641169948",
-			appId: "1:1074641169948:web:6b04abd3fd655744deb9d9"
-			};
-			firebase.initializeApp(firebaseConfig);
-			/*var json;
-			const preObject = document.getElementById('object');
-			const dbRefObject = firebase.database().ref().child('object');
-			dbRefObject.on('value', snap => {
-			json = snap.val;
-			//console.log(snap.val());	
-			//preObject.innerText = JSON.stringify(snap.val(), null, 3);
-			}, function(error) {
-			// The fetch failed.
-			console.error(error);
-			});*/
-			
 			function writeUserData(name,
 			batch,
 			admYear,
